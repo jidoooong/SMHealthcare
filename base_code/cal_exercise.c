@@ -13,8 +13,8 @@
 #include "cal_diets.h"
 #include "cal_healthdata.h"
 
-#define MAX_EXERCISES 100  			// Maximum number of exercises
-#define MAX_EXERCISE_NAME_LEN 50	// Maximum length of the name of exercise
+#define MAX_EXERCISES 100           // Maximum number of exercises
+#define MAX_EXERCISE_NAME_LEN 50   // Maximum length of the name of exercise
 
 
 // To declare the structure of the exercises
@@ -25,6 +25,10 @@ int exercise_list_size = 0;
 /*
     description : read the information in "excercises.txt"
 */
+typedef struct{
+   char exercise_name[MAX_EXERCISE_NAME_LEN];
+   int calories_burned_per_minute;
+}exercise; // by.me structure declare
 
 void loadExercises(const char* EXERCISEFILEPATH) {
     FILE *file = fopen(EXERCISEFILEPATH, "r");
@@ -34,11 +38,11 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
-    while ( ) {
-    	
+    while ((c = fgetc(file)) !=EOF) {//by. me
+       
         if (exercise_list_size >= MAX_EXERCISES){
-        	break;
-		}
+           break;
+      }
     }
 
     fclose(file);
@@ -51,8 +55,8 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     return value : No
     
     operation : 1. provide the options for the exercises to be selected
-    			2. enter the duration of the exercise
-    			3. enter the selected exercise and the total calories burned in the health data
+             2. enter the duration of the exercise
+             3. enter the selected exercise and the total calories burned in the health data
 */
 
 void inputExercise(HealthData* health_data) {
