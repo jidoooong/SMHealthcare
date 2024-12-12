@@ -25,10 +25,6 @@ int exercise_list_size = 0;
 /*
     description : read the information in "excercises.txt"
 */
-typedef struct{
-   char exercise_name[MAX_EXERCISE_NAME_LEN];
-   int calories_burned_per_minute;
-}exercise; // by.me structure declare
 
 void loadExercises(const char* EXERCISEFILEPATH) {
     FILE *file = fopen(EXERCISEFILEPATH, "r");
@@ -38,8 +34,10 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
-    while ((c = fgetc(file)) !=EOF) {//by. me
-       
+    while(fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute)==2)
+	//by.me  two file scan, (==2) : return to read two fscanf  
+	{
+        exercise_list_size++;  //by.me data save to list
         if (exercise_list_size >= MAX_EXERCISES){
            break;
       }
@@ -64,17 +62,26 @@ void inputExercise(HealthData* health_data) {
     
     // ToCode: to provide the options for the exercises to be selected
     printf("The list of exercises: \n");
+    for(i=0;i<exercise_list_size;i++){  //by.me available exercise list print
+    	printf("%d. %s (%d kcal/min)\n", i + 1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute); //by.me exercise list print 
+	}
 
 
     // ToCode: to enter the exercise to be chosen with exit option
-
+    printf("Choice exercise: ");
+    scanf("%d", &choice); // by.me choice exercise scanf
  
-    
     // To enter the duration of the exercise
-    printf("Enter the duration of the exercise (in min.): ");
+    printf("Enter the duration of the exercise (minutes): ");
     scanf("%d", &duration);
 
     // ToCode: to enter the selected exercise and total calcories burned in the health data
-    
+     int calories_burned = duration * exercise_list[choice - 1].calories_burned_per_minute; //by.me calories_burn caculation
+
+    health_data->exercises[health_data->exercise_count] = exercise_list[choice - 1];
+    health_data->exercise_count++;
+    health_data->total_calories_burned += calories_burned;  //by.me healthdata update
+
+    printf("Exercise: %s, Calories burned : %d kcal\n", exercise_list[choice - 1].exercise_name, calories_burned); //by.me exercise print
 
 }

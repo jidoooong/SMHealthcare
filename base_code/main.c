@@ -69,7 +69,7 @@ int main() {
                 printf("[Error] Invalid option. \n");
                 printf("Please try again! \n");
         }
-    } while (choice!=4);
+    } while(choice!=4);
 
     return 0;
 }
