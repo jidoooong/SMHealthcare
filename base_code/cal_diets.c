@@ -34,8 +34,10 @@ void loadDiets(const char* DIETFILEPATH) {
     }
 
      // ToCode: to read a list of the diets from the given file
-    while () {
-    	
+    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake) == 2)
+    	//by.me  two file scan, (==2) : return to read two fscanf
+		{
+    	diet_list_size++;  //by.me data save to list
         if (diet_list_size >= MAX_DIETS){
         	break;
 		}
@@ -57,16 +59,25 @@ void inputDiet(HealthData* health_data) {
     
     // ToCode: to provide the options for the diets to be selected
     printf("The list of diets:\n");
+    for (i = 0; i < diet_list_size; i++)  //by.me available diet list
+	    {
+        printf("%d, %s (%d kcal)\n", i + 1, diet_list[i].food_name, diet_list[i].calories_intake);
+		}  //by.me //by.me diet list print 
     
     
 	// ToCode: to enter the diet to be chosen with exit option
-    
+	printf("Choice diet: ");  //by.me choice diet
+    scanf("%d", &choice);  //by.me choice diet scanf
+     
 
     // ToCode: to enter the selected diet in the health data
-    
+    Diet selected_diet = diet_list[choice-1];  //by.me save to select diet
+    health_data->diet[health_data->diet_count] = selected_diet;  //by.me save to selected diet in structure(diet)
+    health_data->diet_count++;  //by.me save+1
 
     // ToCode: to enter the total calories intake in the health data
-
+    health_data->total_calories_intake += selected_diet.calories_intake;  //by.me add select diet's calories to total intake calories
+    printf("Food: %s, Calories intake: %d kcal\n", selected_diet.food_name, selected_diet.calories_intake);  //by.me foodname, intake calories print
 
 }
 

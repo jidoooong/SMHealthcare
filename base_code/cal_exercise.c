@@ -62,18 +62,19 @@ void inputExercise(HealthData* health_data) {
     
     // ToCode: to provide the options for the exercises to be selected
     printf("The list of exercises: \n");
-    for(i=0;i<exercise_list_size;i++){  //by.me available exercise list print
-    	printf("%d. %s (%d kcal/min)\n", i + 1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute); //by.me exercise list print 
+    for(i=0;i<exercise_list_size;i++)  //by.me available exercise list
+	{ 
+    	printf("%d, %s (%d kcal/min)\n", i + 1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute); //by.me exercise list print 
 	}
 
 
     // ToCode: to enter the exercise to be chosen with exit option
-    printf("Choice exercise: ");
+    printf("Choice exercise: "); //by.me choice exercise 
     scanf("%d", &choice); // by.me choice exercise scanf
  
     // To enter the duration of the exercise
-    printf("Enter the duration of the exercise (minutes): ");
-    scanf("%d", &duration);
+    printf("Enter the duration of the exercise (minutes): ");  //by.me duration exercise
+    scanf("%d", &duration);  //by.me duration exercise scanf
 
     // ToCode: to enter the selected exercise and total calcories burned in the health data
      int calories_burned = duration * exercise_list[choice - 1].calories_burned_per_minute; //by.me calories_burn caculation

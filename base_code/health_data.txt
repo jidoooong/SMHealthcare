@@ -1,10 +1,12 @@
 [Exercises] 
-swimming - 12 kcal
-Total calories burned: 72 kcal 
+running - 11 kcal
+Total calories burned: 55 kcal 
 
 [Diets] 
-Total calories intake: 0 kcal 
+chicken - 925 kcal
+rice - 600 kcal
+Total calories intake: 1525 kcal 
 
 [Total] 
 Basal metabolic rate: 1300 kcal
-The remaining calories: -1372 kcal
+The remaining calories: 170 kcal
