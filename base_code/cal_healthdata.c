@@ -27,24 +27,37 @@
 void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 	int i;
     FILE* file = fopen(HEALTHFILEPATH, "w");
-    if (file == NULL) {
+    if (file==NULL) {
         printf("There is no file for health data.\n");
         return;
     }
 
     // ToCode: to save the chosen exercise and total calories burned 
     fprintf(file, "[Exercises] \n");
+    for (i=0; i<health_data->exercise_count; i++) {
+	    fprintf(file, "%s (%d kcal/min)\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    }
+
     
     
     // ToCode: to save the chosen diet and total calories intake 
     fprintf(file, "\n[Diets] \n");
+    for (i = 0; i < health_data->exercise_count; i++) {
+        fprintf(file, "%s (%d kcal/min)\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    }
 
 
 
     // ToCode: to save the total remaining calrories
     fprintf(file, "\n[Total] \n");
     
-    
+    fprintf(file, "Basal Metabolic Rate: %d kcal\n", BASAL_METABOLIC_RATE);
+    fprintf(file, "Total Calories Burned: %d kcal\n", health_data->total_calories_burned);
+    fprintf(file, "Total Calories Intake: %d kcal\n", health_data->total_calories_intake);
+    int remaining_calories = health_data->total_calories_intake-BASAL_METABOLIC_RATE-health_data->total_calories_burned;
+	fprintf(file, "Remaining Calories: %d kcal\n", remaining_calories);
+
+    fclose(file);
 }
 
 /*
@@ -61,7 +74,12 @@ void printHealthData(const HealthData* health_data) {
 	int i;
 	
 	// ToCode: to print out the saved history of exercises
-	printf("=========================== History of Exercise =======================\n");
+	 for (i = 0; i < health_data->exercise_count; i++) {
+        int total_calories_burned = health_data->exercises[i].calories_burned_per_minute; // ¼Ò¸ðµÈ ÃÑ Ä®·Î¸®
+        printf("Exercise: %s, Calories burned: %d kcal\n",
+               health_data->exercises[i].exercise_name,
+               total_calories_burned);
+    }
   
   
     printf("=======================================================================\n");
