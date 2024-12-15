@@ -70,14 +70,15 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 
 void printHealthData(const HealthData* health_data) {
 	int i;
+	static int exercise_durations[MAX_EXERCISES];  //
 	
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
-    for (i = 0; i < health_data->exercise_count; i++)  //by.me
-	{
-    int total_calories_burned = health_data->exercises[i].calories_burned_per_minute * health_data->exercises[i].duration;  //by.me
-    printf("Exercise: %s, Calories burned: %d kcal\n", health_data->exercises[i].exercise_name, total_calories_burned);  //by.me
-    }
+    for (i = 0; i < health_data->exercise_count; i++) {
+    int duration = exercise_durations[i];  // ¿îµ¿ ½Ã°£
+    int total_calories_burned = health_data->exercises[i].calories_burned_per_minute * duration; // ÃÑ Ä®·Î¸® °è»ê
+    printf("Exercise: %s, Calories burned: %d kcal\n", health_data->exercises[i].exercise_name, total_calories_burned);
+           }
     
   
     printf("=======================================================================\n");
@@ -106,7 +107,19 @@ void printHealthData(const HealthData* health_data) {
     printf("=======================================================================\n \n");
     
 	
-	// ToCode: to print out the recommendtaion depending on the current total calories burned and intake    
+	// ToCode: to print out the recommendtaion depending on the current total calories burned and intake 
+	 if (remaining_calories == 0) {
+        printf("You have consumed all your calories for today!\n");
+    } else if (remaining_calories < 0) {
+        printf("[Warning] Too few calories!\n");
+    } else {
+        if (health_data->total_calories_intake >= DAILY_CALORIE_GOAL) {
+            printf("Your total calorie intake for today has reached your goal!\n");
+        } else {
+            printf("Your total calorie intake for today has not reached your goal, remember to eat more!\n");
+        }
+        printf("Please exercise for your health!\n");
+    }   
    
     
 	 printf("=======================================================================\n");
