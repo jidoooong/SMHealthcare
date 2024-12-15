@@ -34,29 +34,27 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 
     // ToCode: to save the chosen exercise and total calories burned 
     fprintf(file, "[Exercises] \n");
-    for (i=0; i<health_data->exercise_count; i++) {
-	    fprintf(file, "%s (%d kcal/min)\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
-    }
+    for (i = 0; i < health_data->exercise_count; i++) {
+    fprintf(file, "Exercise: %s, Calories burned : %d kcal\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    }  //by.me  
 
-    
     
     // ToCode: to save the chosen diet and total calories intake 
     fprintf(file, "\n[Diets] \n");
-    for (i = 0; i < health_data->exercise_count; i++) {
-        fprintf(file, "%s (%d kcal/min)\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
-    }
-
+    for (i = 0; i < health_data->diet_count; i++) {
+    fprintf(file, "Food: %s, Calories intake: %d kcal\n", health_data->diet[i].food_name, health_data->diet[i].calories_intake);
+    }  //by.me
 
 
     // ToCode: to save the total remaining calrories
     fprintf(file, "\n[Total] \n");
     
-    fprintf(file, "Basal Metabolic Rate: %d kcal\n", BASAL_METABOLIC_RATE);
-    fprintf(file, "Total Calories Burned: %d kcal\n", health_data->total_calories_burned);
-    fprintf(file, "Total Calories Intake: %d kcal\n", health_data->total_calories_intake);
-    int remaining_calories = health_data->total_calories_intake-BASAL_METABOLIC_RATE-health_data->total_calories_burned;
-	fprintf(file, "Remaining Calories: %d kcal\n", remaining_calories);
-
+    fprintf(file, "Basal Metabolic Rate: %d kcal\n", BASAL_METABOLIC_RATE);  //by.me
+    fprintf(file, "Total calories burned: %d kcal\n", health_data->total_calories_burned);  //by.me
+    fprintf(file, "Total calories intake: %d kcal\n", health_data->total_calories_intake);  //by.me
+    int remaining_calories = health_data->total_calories_intake - BASAL_METABOLIC_RATE - health_data->total_calories_burned;  //by.me
+    fprintf(file, "The remaining calories: %d kcal\n", remaining_calories);  //by.me
+    
     fclose(file);
 }
 
@@ -74,18 +72,22 @@ void printHealthData(const HealthData* health_data) {
 	int i;
 	
 	// ToCode: to print out the saved history of exercises
-	 for (i = 0; i < health_data->exercise_count; i++) {
-        int total_calories_burned = health_data->exercises[i].calories_burned_per_minute; // ¼Ò¸ðµÈ ÃÑ Ä®·Î¸®
-        printf("Exercise: %s, Calories burned: %d kcal\n",
-               health_data->exercises[i].exercise_name,
-               total_calories_burned);
+	printf("=========================== History of Exercise =======================\n");
+    for (i = 0; i < health_data->exercise_count; i++)  //by.me
+	{
+    int total_calories_burned = health_data->exercises[i].calories_burned_per_minute * health_data->exercises[i].duration;  //by.me
+    printf("Exercise: %s, Calories burned: %d kcal\n", health_data->exercises[i].exercise_name, total_calories_burned);  //by.me
     }
-  
+    
   
     printf("=======================================================================\n");
 
     // ToCode: to print out the saved history of diets
     printf("============================= History of Diet =========================\n");
+    for (i = 0; i < health_data->diet_count; i++)  //by.me
+	{
+    printf("Food: %s, Calories intake: %d kcal\n", health_data->diet[i].food_name, health_data->diet[i].calories_intake);  //by.me
+    }
 
 
     printf("=======================================================================\n");
@@ -95,12 +97,17 @@ void printHealthData(const HealthData* health_data) {
 	// total calories burned, total calories intake, and the remaining calories
 	printf("============================== Total Calories =========================\n");
  
+    printf("Basal Metabolic Rate: %d kcal\n", BASAL_METABOLIC_RATE);
+    printf("Total calories burned: %d kcal\n", health_data->total_calories_burned);
+    printf("Total calories intake: %d kcal\n", health_data->total_calories_intake);
+    int remaining_calories = health_data->total_calories_intake - BASAL_METABOLIC_RATE - health_data->total_calories_burned;
+    printf("The remaining calories: %d kcal\n", remaining_calories);
  
     printf("=======================================================================\n \n");
     
 	
 	// ToCode: to print out the recommendtaion depending on the current total calories burned and intake    
-    
+   
     
 	 printf("=======================================================================\n");
 }
