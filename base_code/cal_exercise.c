@@ -59,13 +59,14 @@ void loadExercises(const char* EXERCISEFILEPATH) {
 
 void inputExercise(HealthData* health_data) {
     int choice, duration, i;
-    static int exercise_durations[MAX_EXERCISES] = {0}; //
+    
     
     // ToCode: to provide the options for the exercises to be selected
     printf("The list of exercises: \n");
-    for(i=0;i<exercise_list_size;i++)  //by.me available exercise list
+    
+	for(i=0; i<exercise_list_size; i++)  //by.me available exercise list
 	{ 
-    	printf("%d, %s (%d kcal/min)\n", i + 1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute); //by.me exercise list print 
+    	printf("%d, %s (%d kcal/min)\n", i+1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute); //by.me exercise list print 
 	}
 
 
@@ -78,12 +79,12 @@ void inputExercise(HealthData* health_data) {
     scanf("%d", &duration);  //by.me duration exercise scanf
 
     // ToCode: to enter the selected exercise and total calcories burned in the health data
-     int calories_burned = duration * exercise_list[choice - 1].calories_burned_per_minute; //by.me calories_burn caculation
+    int calories_burned = duration * exercise_list[choice - 1].calories_burned_per_minute; //by.me calories_burn caculation
 
-    health_data->exercises[health_data->exercise_count] = exercise_list[choice - 1];
-    health_data->exercise_count++;
-    exercise_durations[health_data->exercise_count] = duration;  //
-    health_data->total_calories_burned += calories_burned;  //by.me healthdata update
+    health_data->exercises[health_data->exercise_count] = exercise_list[choice - 1];  //by.me add selected exercise to health data
+    health_data->exercise_count++;  // by.me exercise +1
+    health_data->exercises[health_data->exercise_count - 1].calories_burned_per_minute = calories_burned;  //by.me update calories burned
+    health_data->total_calories_burned += calories_burned;  //by.me renew total calories burned
 
     printf("Exercise: %s, Calories burned : %d kcal\n", exercise_list[choice - 1].exercise_name, calories_burned); //by.me exercise print
 

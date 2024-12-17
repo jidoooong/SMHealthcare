@@ -1,12 +1,12 @@
 [Exercises] 
-running - 11 kcal
-Total calories burned: 55 kcal 
+Exercise: running, Calories burned : 440 kcal
+Exercise: walking, Calories burned : 16 kcal
 
 [Diets] 
-chicken - 925 kcal
-rice - 600 kcal
-Total calories intake: 1525 kcal 
+Food: chicken, Calories intake: 925 kcal
 
 [Total] 
-Basal metabolic rate: 1300 kcal
-The remaining calories: 170 kcal
+Basal Metabolic Rate: 1300 kcal
+Total calories burned: 456 kcal
+Total calories intake: 925 kcal
+The remaining calories: -831 kcal
